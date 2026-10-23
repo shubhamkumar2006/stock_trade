@@ -1,0 +1,11 @@
+node_modules/
+**/node_modules/
+**/build/
+**/coverage/
+**/.env
+**/.env.*
+!**/.env.example
+frontend/media/
+frontend/public/media/images/
+dashboard/public/logo.png
+npm-debug.log*
