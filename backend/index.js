@@ -24,10 +24,14 @@ const isProduction = process.env.NODE_ENV === "production";
 const cookieName = "singhtrades_session";
 const sessionDurationMs = 7 * 24 * 60 * 60 * 1000;
 const app = express();
-const allowedOrigins = (process.env.CORS_ORIGINS || "http://localhost:3000,http://localhost:3001")
+const allowedOrigins = [...new Set([
+  ...(process.env.CORS_ORIGINS || "http://localhost:3000,http://localhost:3001")
   .split(",")
   .map((origin) => origin.trim())
-  .filter(Boolean);
+  .filter(Boolean),
+  "https://singhtrades-frontend.onrender.com",
+  "https://singhtrades-dashboard.onrender.com",
+])];
 
 app.disable("x-powered-by");
 app.use(cors({

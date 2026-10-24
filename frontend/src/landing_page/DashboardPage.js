@@ -1,11 +1,16 @@
 import React from "react";
 
 function DashboardPage() {
+  const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL ||
+    (process.env.NODE_ENV === "production"
+      ? "https://singhtrades-dashboard.onrender.com"
+      : "http://localhost:3000");
+
   return (
     <main aria-label="Trading dashboard">
       <iframe
         title="Stock Traders simulated dashboard"
-        src={process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3000"}
+        src={dashboardUrl}
         style={{
           display: "block",
           width: "100%",

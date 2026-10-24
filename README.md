@@ -88,7 +88,10 @@ cd ..\dashboard; npm run build
 
 ## Deployment and limitations
 
-- Use HTTPS, `NODE_ENV=production`, and exact trusted `CORS_ORIGINS` in deployment.
+- For the current Render deployment, use `REACT_APP_API_URL=https://singhtrades-backend.onrender.com` and `REACT_APP_DASHBOARD_URL=https://singhtrades-dashboard.onrender.com` in the frontend build environment. The frontend defaults to this dashboard URL in production.
+- Set the backend `CORS_ORIGINS` to include `https://singhtrades-frontend.onrender.com` and `https://singhtrades-dashboard.onrender.com`; both origins are also included in the API's built-in allowlist.
+- For both frontend and dashboard Render Static Sites, add a rewrite rule with source `/*` and destination `/index.html`. This is required so direct visits and refreshes on React routes work.
+- Use HTTPS and `NODE_ENV=production` in deployment. Keep `CORS_ORIGINS` limited to the exact browser origins that need API access.
 - `Secure` cookies are enabled in production. Configure reverse-proxy trust and CSRF/origin policy for the deployment topology.
 - In-memory rate limiting is per API process; use a shared rate-limit store for multi-instance production deployments.
 - Twilio Verify and SMTP require paid/configured external accounts. This repository has no provider secrets.
